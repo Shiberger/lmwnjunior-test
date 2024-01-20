@@ -6,3 +6,44 @@
 //
 
 import Foundation
+
+struct Travel : Hashable, Codable, Identifiable {
+    let id: Int // not String
+    let name: String
+    let image_url : [URL] // or [String] but not String
+    let description: String
+    let positive_votes_count: Int // not String
+}
+
+struct Root: Decodable {
+    let photos : [Travel]
+}
+
+class ViewModel : ObservableObject{
+    @Published var travels: [Travel] = []
+    
+    func fetch() {
+        guard let url = URL (string: "https://api.500px.com/v1/photos?feature=popular&page=1")
+        else {
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url){ [weak self] data, _ ,
+            error in
+            guard let data = data, error == nil else {
+                return
+            }
+            do{
+                let response = try JSONDecoder().decode(Root.self, from: data)
+                DispatchQueue.main.async {
+                    self?.travels = response.photos
+                }
+            }
+            catch{
+                print(error)
+            }
+           
+        }
+        task.resume()
+    }
+}
