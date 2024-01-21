@@ -36,7 +36,7 @@ struct ContentView: View {
               }
               Divider()
           }
-          .onAppear {
+          .refreshable {
               viewModel.fetch()
           }
       }
