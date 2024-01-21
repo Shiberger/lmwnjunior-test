@@ -1,7 +1,7 @@
 # lmwnjunior assginment
 SwiftUI API call + pull refresh
 
-![Uploading pv-full-travel.png…]()
+![Preview](pv-lmwn.png)
 
 ## Contributing
 
