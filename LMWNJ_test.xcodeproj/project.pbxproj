@@ -57,9 +57,9 @@
 				CD4C711E2B5C682F003795EB /* LMWNJ-test-Info.plist */,
 				CD4C71102B5C67ED003795EB /* LMWNJ_testApp.swift */,
 				CD4C71122B5C67ED003795EB /* ContentView.swift */,
+				CD4C71212B5C7639003795EB /* ViewModel.swift */,
 				CD4C71142B5C67EE003795EB /* Assets.xcassets */,
 				CD4C71162B5C67EE003795EB /* Preview Content */,
-				CD4C71212B5C7639003795EB /* ViewModel.swift */,
 			);
 			path = LMWNJ_test;
 			sourceTree = "<group>";

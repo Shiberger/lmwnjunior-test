@@ -7,65 +7,37 @@
 
 import SwiftUI
 
-struct URLImage: View {
-    let urlString: String
-    
-    @State var data: Data?
-    
-    var body: some View{
-        
-        if let data = data, let uiimage = UIImage(data: data) {
-            Image(uiImage: uiimage)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 150, height: 150)
-                    .background(Color.gray)
-                    .cornerRadius(3)
-        }
-        else{
-            Image("")
-                .frame(width: 120, height: 60)
-                .background(Color.gray)
-                .onAppear{
-                    fetchData()
-                }
-        }
-    }
-    
-    private func fetchData(){
-        guard let url = URL(string: urlString) else {
-            return
-        }
-        
-        let task = URLSession.shared.dataTask(with: url){ data, _,
-            _ in
-            self.data = data
-        }
-        task.resume()
-    }
-}
-
 struct ContentView: View {
-    @StateObject var viewModel = ViewModel()
+    @ObservedObject var viewModel = ViewModel()
     
     var body: some View {
-        NavigationView {
-            List{
-                ForEach(viewModel.travels){ travel in
-                    HStack {
-                        URLImage(urlString: travel.description)
-                                            
-                            Text("\(travel.name)")
-                                    .bold()
-                        
-                            }
-                            .padding(10)
+        List(viewModel.travels) { travel in
+            HStack(alignment: .top) {
+                AsyncImage(url: travel.imageUrl[0])
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 100, height: 250)
+                    .cornerRadius(5)
+                VStack(alignment: .leading) {
+                    Text(travel.name)
+                        .font(.headline)
+                        .padding(.bottom, 2)
+                        .fixedSize(horizontal: false, vertical: true)
+                    Text(travel.description)
+                        .font(.subheadline)
+                        .padding(.bottom, 2)
+                }
+                Spacer()
+                HStack {
+                    Image(systemName: "heart.fill")
+                        .foregroundColor(.red)
+                    Text("\(travel.positiveVotesCount)")
+                        .font(.caption)
                 }
             }
-            .navigationTitle("Travels")
-            .onAppear{
-                viewModel.fetch()
-            }
+            Divider()
+        }
+        .refreshable {
+            viewModel.fetch()
         }
     }
 }
