@@ -7,4 +7,5 @@ SwiftUI API call + pull refresh
 
 In Code, we will only encounter LMWN's Assignments and practice our skills.
 
-**Remark: It takes a little time to load JSON data...**
+**Remark: Pull refresh first and then the data will be shown...**
+**Remark 2: It takes a little time to load JSON data...**
