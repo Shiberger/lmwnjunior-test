@@ -1,7 +1,7 @@
 # lmwnjunior assginment
 SwiftUI API call + pull refresh
 
-<img src="https://imgur.com/a/iNc2qCr">
+![Preview](https://imgur.com/a/iNc2qCr)
 
 ## Contributing
 
