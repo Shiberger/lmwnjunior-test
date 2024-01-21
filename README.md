@@ -6,3 +6,5 @@ SwiftUI API call + pull refresh
 ## Contributing
 
 In Code, we will only encounter LMWN's Assignments and practice our skills.
+
+**Remark: It takes a little time to load JSON data...**
